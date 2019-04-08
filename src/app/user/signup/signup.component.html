@@ -1,0 +1,132 @@
+<div class="row m-auto">
+  <div class="container col-sm-4 mt-5">
+    <h3 class="text-center display-5">Your Profile Pic</h3>
+    <hr>
+    <div class="card ml-5">
+      <div class="card-body text-center"><i class="far fa-user fa-9x"></i></div>
+      <div class="card-footer text-center">
+        <input type="file" name="uploadpic" (change)="OnFileSelected($event)" #picupload>
+        <button class="btn btn-secondary btn-sm" (click)="picupload.click()">Upload Pic</button>
+      </div>
+    </div>
+    <span class="text-danger font-weight-bold" *ngIf="!correctFileFormat">Your profile pic should be of Maximum size
+      1MB and Supports
+      format jpeg and png.</span>
+  </div>
+  <div class="col-sm-8 mt-5">
+    <div class="conatiner">
+      <h2 class="text-center display-5">Fill in Your Details</h2>
+      <hr>
+      <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
+        <div class="form-heading">Enter the Basic Details <span class="arrow"></span></div>
+        <div ngModelGroup="basicDetails" #basicDetails="ngModelGroup">
+          <div class="form-group">
+            <label for="email">Your Email</label>
+            <div class="input-group">
+              <input type="email" name="email" class="form-control" [disabled]="changeEmail" ngModel required email>
+              <span class="input-group-append">
+                <button class="btn btn-info" type="button"
+                  (click)="OnEmailChange()">{{changeEmail?"Edit":"Save"}}</button></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Your Number</label>
+            <div class="input-group">
+              <input type="number" name="contactNumber" class="form-control" [disabled]="changeNumber" ngModel required>
+              <span class="input-group-append">
+                <button class="btn btn-info" type="button"
+                  (click)="OnNumberChange()">{{changeNumber?"Edit":"Save"}}</button></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">Enter your Password</label>
+            <input type="text" name="password" placeholder="Enter your password" class="form-control" ngModel required>
+          </div>
+          <div class="form-group">
+            <label for="password">Confirm your Password</label>
+            <input type="password" name="confirmPassword" placeholder="Confirm your password" class="form-control"
+              ngModel required>
+          </div>
+          <div class="d-flex flex-column">
+            <span class="text-danger font-weight-bold">{{errorText}}</span>
+            <span class="text-success font-weight-bold" *ngIf="isBasicDetailsVerified">You have successfully verified
+              your basic
+              details. Please fill out rest of your Details.</span>
+            <div class="d-flex">
+              <button class="btn btn-primary font-weight-bold" type="button" (click)="VerifyBasicDetails(basicDetails)"
+                [disabled]="isBasicDetailsVerified">Verify Details</button>
+              <button class="btn btn-primary font-weight-bold ml-3" (click)="OnBasicDetailsChange(basicDetails)"
+                [disabled]="!isBasicDetailsVerified">Change Details</button>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="form-heading">Complete your Registration <span class="arrow"></span></div>
+        <div ngModelGroup="otherDetails" #otherDetails="ngModelGroup">
+          <div class="form-group">
+            <label for="firstname">Enter your First Name</label>
+            <input type="text" name="firstName" placeholder="Enter your first name" class="form-control" ngModel
+              required>
+          </div>
+          <div class="form-group">
+            <label for="lastname">Enter your Last Name</label>
+            <input type="text" name="lastName" placeholder="Enter your last name" class="form-control" ngModel required>
+          </div>
+          <div class="form-group">
+            <label for="dob">Enter your Date of Birth</label>
+            <input type="date" name="dob" class="form-control" [ngModel]="'2000-01-01'" required>
+          </div>
+          <div class="form-group">
+            <label for="sex">Select your Sex</label>
+            <select name="sex" class="form-control" [ngModel]="'none'" required>
+              <option value="none">--Select--</option>
+              <option value="male" class="font-weight-bold">Male</option>
+              <option value="female" class="font-weight-bold">Female</option>
+              <option value="other" class="font-weight-bold">Others</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="city">Enter your City</label>
+            <input type="text" name="city" placeholder="Enter your City" class="form-control" ngModel required>
+          </div>
+          <div class="form-group">
+            <label for="securityQuestion">Select a Security Question</label>
+            <select name="securityQuestion" class="form-control" [ngModel]="'none'" required>
+              <option value="none">Select your Security Qusetion</option>
+              <option value="teacher" class="font-weight-bold">Your favorite teacher</option>
+              <option value="pet" class="font-weight-bold">Your first pet name</option>
+              <option value="mother" class="font-weight-bold">Your mother's maiden name</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="securityAnswer">Enter your Security Answer</label>
+            <input type="text" name="securityAnswer" class="form-control" ngModel required>
+            <span class="help-block text-info font-weight-bold">Please remember your security answer as this will be
+              used
+              to reset your
+              password</span>
+          </div>
+          <div class="d-flex flex-column">
+            <span class="text-danger font-weight-bold">{{errorText1}}</span>
+            <span class="text-success font-weight-bold" *ngIf="isOtherDetailsVerified">You have successfully verified
+              your other
+              details. Please Save your data</span>
+            <div class="d-flex">
+              <button class="btn btn-primary font-weight-bold" type="button" (click)="VerifyOtherDetails(otherDetails)"
+                [disabled]="isOtherDetailsVerified">Verify Details</button>
+              <button type="button" class="btn btn-primary font-weight-bold ml-3"
+                (click)="OnOtherDetailsChange(otherDetails)" [disabled]="!isOtherDetailsVerified">Change
+                Details</button>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success btn-lg font-weight-bold" [disabled]="!isUserVerified">Save
+            Details</button>
+          <button type="reset" class="btn btn-dark font-weight-bold ml-3">Go Back</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

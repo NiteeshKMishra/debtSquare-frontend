@@ -1,0 +1,49 @@
+#firstrow{
+  background: url("/./assets/images/front_image_large.jpg"); 
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 400px;
+}
+
+
+#firstrow .dark-overlay {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  min-height: 400px;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+
+#searchfriend{
+  background: rgba(0, 139, 139, 0.363);
+  border: 1px double rgba(0, 65, 139, 0.151)
+}
+#signupform{
+  background: rgba(0, 139, 139, 0.61);
+  border: 1px double rgba(0, 65, 139, 0.664)
+}
+
+#serchform input{
+ height: 50px
+}
+
+label{
+  font-weight: bolder;
+}
+
+@media(max-width:500px){
+  #firstrow{
+    background: url("/./assets/images/front_image_small.gif"); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 450px;
+  }
+  #firstrow .dark-overlay {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    min-height: 450px;
+    background: rgba(0, 0, 0, 0.7);
+  }
+}

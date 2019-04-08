@@ -8,14 +8,18 @@ import { AppComponent } from './app.component';
 import { UserLoginService } from './app.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { MainBodyComponent } from './main-body/main-body.component'
+import { MainBodyComponent } from './main-body/main-body.component';
+import { UserComponent } from './user/user.component';
+import { SignupComponent } from './user/signup/signup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    MainBodyComponent
+    MainBodyComponent,
+    UserComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
