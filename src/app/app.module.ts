@@ -5,12 +5,13 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserLoginService } from './app.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { MainBodyComponent } from './main-body/main-body.component';
 import { UserComponent } from './user/user.component';
 import { SignupComponent } from './user/signup/signup.component';
+import { SignUpService } from './user/signup/singup.service';
+import { SigninComponent } from './user/signin/signin.component'
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SignupComponent } from './user/signup/signup.component';
     FooterComponent,
     MainBodyComponent,
     UserComponent,
-    SignupComponent
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,7 @@ import { SignupComponent } from './user/signup/signup.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserLoginService],
+  providers: [SignUpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

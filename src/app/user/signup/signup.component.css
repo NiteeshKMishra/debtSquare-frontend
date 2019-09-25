@@ -12,6 +12,24 @@ input[type='file']{
   display: none;
 }
 
+button{
+  font-weight: bold;
+}
+
+#msgModalSpan{
+  font-weight:  bolder;
+  color: #ff0000;
+}
+
+.hide{
+  display: none;
+}
+
+img{
+  height: 175px;
+  width: 155px;
+}
+
 .form-heading {
   background-color:#ff0000;
   color:#fff;

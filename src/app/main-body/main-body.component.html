@@ -1,15 +1,13 @@
-<div class="row m-auto" id="firstrow">
+<div class="row m-auto" id="mainsection">
   <div class="col-md-12 dark-overlay">
-    <div class="">
-      <h3 class="text-center text-light mt-5">Square Your Debts</h3>
-      <p class="text-justify text-light mt-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
-        perspiciatis earum
-        saepe iusto ipsum magni
-        quaerat dicta sed sequi fugit dolorem temporibus cupiditate fuga iure, similique omnis quae ea hic!Ratione nulla
-        odit neque repellat? Facilis quibusdam incidunt ducimus iure ullam adipisci rem magni vero possimus dolores
-        earum
-        quaerat repellendus, amet velit. Sed odio velit eius, deserunt voluptas soluta possimus.</p>
-    </div>
+    <h3 class="text-center text-light mt-5">Square Your Debts</h3>
+    <p class="text-justify text-light mt-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
+      perspiciatis earum
+      saepe iusto ipsum magni
+      quaerat dicta sed sequi fugit dolorem temporibus cupiditate fuga iure, similique omnis quae ea hic!Ratione nulla
+      odit neque repellat? Facilis quibusdam incidunt ducimus iure ullam adipisci rem magni vero possimus dolores
+      earum
+      quaerat repellendus, amet velit. Sed odio velit eius, deserunt voluptas soluta possimus.</p>
   </div>
 </div>
 
@@ -19,18 +17,23 @@
     <div class="container">
       <h3 class="text-center display-5">Sign Up</h3>
       <hr>
-      <form>
+      <form (ngSubmit)="OnSignupProcced(signupForm)" #signupForm="ngForm">
         <div class="form-group">
           <label for="email">Enter your Email</label>
-          <input type="email" name="useremail" class="form-control" placeholder="someone@example.com">
+          <input type="email" name="useremail" class="form-control" placeholder="someone@example.com" ngModel required
+            email>
         </div>
         <div class="form-group">
           <label for="number">Enter your Number</label>
-          <input type="number" name="usermobile" class="form-control" placeholder="10 digit mobile number">
+          <input type="number" name="usermobile" class="form-control" placeholder="10 digit mobile number" ngModel
+            required>
         </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary">Procced</button>
-          <button type="reset" class="btn btn-secondary ml-2">Cancel</button>
+        <div class="form-group d-flex flex-column">
+          <span class="text-center font-weight-bold text-danger">{{signUpErrorMsg}}</span>
+          <div>
+            <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Procced</button>
+            <button type="reset" class="btn btn-secondary ml-2">Cancel</button>
+          </div>
         </div>
       </form>
     </div>

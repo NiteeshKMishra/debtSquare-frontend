@@ -1,4 +1,4 @@
-#firstrow{
+#mainsection{
   background: url("/./assets/images/front_image_large.jpg"); 
   background-repeat: no-repeat;
   background-size: cover;
@@ -6,7 +6,7 @@
 }
 
 
-#firstrow .dark-overlay {
+#mainsection .dark-overlay {
   position: absolute;
   left: 0;
   width: 100%;
@@ -33,13 +33,13 @@ label{
 }
 
 @media(max-width:500px){
-  #firstrow{
+  #mainsection{
     background: url("/./assets/images/front_image_small.gif"); 
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 450px;
   }
-  #firstrow .dark-overlay {
+  #mainsection .dark-overlay {
     position: absolute;
     left: 0;
     width: 100%;

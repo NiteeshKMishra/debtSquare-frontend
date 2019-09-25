@@ -1,20 +1,29 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { SignUpService } from './singup.service';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css'],
-  providers: [SignUpService]
+  styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, OnDestroy {
 
   @ViewChild('signupForm') signUpForm: NgForm;
+  basicDataSubs: Subscription;
+
+  imagepath: string;
+  isImageAvailable = false;
+  profilepicId = '';
+
+  basicUserData = {};
 
   changeEmail = true;
   changeNumber = true;
   correctFileFormat = true;
+  selectedFile: File = null;
 
   errorText = '';
   errorText1 = '';
@@ -22,13 +31,23 @@ export class SignupComponent implements OnInit {
   isOtherDetailsVerified = false;
   isUserVerified = false;
 
+  cityArray = ['Mumbai', 'Delhi', 'Kolkata', 'Chennai', 'Bengaluru', 'Hyderabad', 'Ahmadabad', 'Pune', 'Surat', 'Jaipur', 'Kanpur', 'Lucknow', 'Nagpur', 'Ranchi', 'Ghaziabad', 'Indore', 'Coimbatore', 'Kochi', 'Kozhikode', 'Bhopal', 'Thrissur', 'Vadodara', 'Agra', 'Visakhapatnam', 'Thiruvananthapuram']
 
   emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   specialCharRegex = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
 
-  constructor(private signupService: SignUpService) { }
+  constructor(private signupService: SignUpService, private router: Router) {
+  }
 
   ngOnInit() {
+    this.basicDataSubs = this.signupService.getBasicData().subscribe((data) => {
+      this.basicUserData['email'] = data.email;
+      this.basicUserData['number'] = data.number;
+    })
+  }
+
+  ngOnDestroy() {
+    this.basicDataSubs.unsubscribe();
   }
 
   OnEmailChange() {
@@ -39,7 +58,7 @@ export class SignupComponent implements OnInit {
     this.changeNumber = !this.changeNumber;
   }
 
-  OnFileSelected(event) {
+  OnProfilepicUpload(event) {
     var fileType = event.target.files[0].type;
     var fileSize = Math.round(event.target.files[0].size / 1024);
     var correctFileType = false;
@@ -51,8 +70,39 @@ export class SignupComponent implements OnInit {
     }
     else {
       this.correctFileFormat = true;
-      //write the logic here
+      this.selectedFile = <File>event.target.files[0];
+      var imageData = new FormData();
+      imageData.append('profilePic', this.selectedFile);
+      this.signupService.uploadImage(imageData)
+        .then((res) => {
+          this.profilepicId = res.data.id;
+          this.imagepath = `http://localhost:3000/user/profilePic/${res.data.id}`;
+          this.isImageAvailable = true;
+        })
+        .catch((err) => {
+          (<HTMLSpanElement>document.getElementById('msgModalSpan')).textContent = 'Unable to Upload your picture!! Please try after sometime.';
+          (<HTMLElement>document.getElementById('modalButton')).click();
+          setTimeout(() => {
+            (<HTMLElement>document.getElementById('modalButton')).click();
+          }, 1500)
+        });
     }
+  }
+
+  DeleteProfilepic() {
+    this.signupService.deleteImage(this.profilepicId)
+      .then((res) => {
+        if (res.data.message === 'File Deleted') {
+          this.isImageAvailable = false;
+        }
+      })
+      .catch((err) => {
+        (<HTMLSpanElement>document.getElementById('msgModalSpan')).textContent = 'Unable to delete your pic!! Please try after sometime.';
+        (<HTMLElement>document.getElementById('modalButton')).click();
+        setTimeout(() => {
+          (<HTMLElement>document.getElementById('modalButton')).click();
+        }, 1500)
+      })
   }
 
   VerifyBasicDetails(basicDetails) {
@@ -145,11 +195,21 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     var userData = {};
     Object.assign(userData, this.signUpForm.value.basicDetails, this.signUpForm.value.otherDetails);
-    userData['imageUrl'] = 'somepic';
+    userData['imageId'] = this.profilepicId;
     this.signupService.sendUser(userData).then((res) => {
-      console.log(res)
+      (<HTMLSpanElement>document.getElementById('msgModalSpan')).setAttribute('class', 'text-success');
+      (<HTMLSpanElement>document.getElementById('msgModalSpan')).textContent = 'Registered Successfully. Please login into your account';
+      (<HTMLElement>document.getElementById('modalButton')).click();
+      setTimeout(() => {
+        (<HTMLElement>document.getElementById('modalButton')).click();
+        this.router.navigate(['/']);
+      }, 2000)
     }).catch((err) => {
-      console.log('Some Err Occured Please try after some time');
+      (<HTMLSpanElement>document.getElementById('msgModalSpan')).textContent = 'Something went wrong!! Please try after sometime.';
+      (<HTMLElement>document.getElementById('modalButton')).click();
+      setTimeout(() => {
+        (<HTMLElement>document.getElementById('modalButton')).click();
+      }, 1500)
     })
   }
 
