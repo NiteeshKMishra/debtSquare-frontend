@@ -1,4 +1,89 @@
-nav{
+/* nav{
   background-color: orangered;
+} */
+
+.footer {
+background: #ff4400e7;
+color: #ffffff;
+height: 30vh;
+position: relative;
+}
+.footer-content {
+height: 25vh;
+display: flex;
 }
 
+.footer-section{
+  flex: 1;
+  padding: 1rem;
+  text-align: center;
+}
+
+.contacts{
+  display: flex;
+  flex-direction: column;
+}
+
+.socials{
+  margin-top: 1rem;
+  color: #00eeff;
+}
+.socials a {
+  margin: 0 1rem;
+}
+
+links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.links ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.links a{
+  font-weight: bolder;
+  text-decoration: none;
+}
+
+.writeus-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.writeus-form input{
+  display: block;
+  height: 1.5rem;
+  width: 50%;
+  margin-bottom: 0.5rem;
+}
+
+.writeus-form textarea {
+  display: block;
+  height: 2.5rem;
+  width: 50%;
+}
+
+.writeus-form button {
+  margin-top: 0.2rem; 
+  width: 50%;
+  border-radius: 1rem;
+  background-color: #00b7ff;
+  font-weight: bold;
+  padding: 0;
+}
+
+.footer-bottom {
+  background: #ff4400b9;
+  color: ffffff;
+  height: 5vh;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.5rem 0; 
+  text-align: center;
+  font-weight: bolder;
+}

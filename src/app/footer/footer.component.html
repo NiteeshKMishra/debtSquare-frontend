@@ -1,30 +1,44 @@
-<nav class="navbar navbar-expand-sm navbar-dark">
-  <div class="container py-1">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a href="" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item">
-        <a href="" class="nav-link">Connect</a>
-      </li>
-      <li class="nav-item">
-        <a href="" class="nav-link">Contact Us</a>
-      </li>
-    </ul>
-    <div class="d-flex flex-column">
-      <a href="" class="navbar-brand font-weight-bold">DebtSquare</a>
-      <span>Copyright @{{currentYear}}</span>
+<div class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <div class="contacts">
+        <h6>For any queries contact us on:</h6>
+        <span><i class="fas fa-phone"></i> &nbsp;9986994271 </span>
+        <span><i class="fas fa-envelope"></i> &nbsp;debtsquare.mailer@gmail.com </span>
+      </div>
+      <div class="socials">
+        <h6>Follow us on social media:</h6>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
     </div>
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a href="" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item">
-        <a href="" class="nav-link">Connect</a>
-      </li>
-      <li class="nav-item">
-        <a href="" class="nav-link">Contact Us</a>
-      </li>
-    </ul>
+    <div class="footer-section">
+      <h5>Useful Links</h5>
+      <div class="links">
+        <ul>
+          <a href="#">
+            <li>About us</li>
+          </a>
+          <a href="#">
+            <li>Feedback</li>
+          </a>
+          <a href="#">
+            <li>Support</li>
+          </a>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-section">
+      <h5>Write to Us</h5>
+      <form class="writeus-form">
+        <input type="email" name="writeus-email" placeholder="Your email address...">
+        <textarea name="writeus-text" placeholder="Your message..."></textarea>
+        <button type="submit">Send <i class="fas fa-envelope"></i></button>
+      </form>
+    </div>
   </div>
-</nav>
+  <div class="footer-bottom">
+    DebtSquare &copy; {{currentYear}} | Non-commercial | Non-profit
+  </div>
+</div>
